@@ -1,0 +1,8 @@
+{
+  "name": "ferramentas-video",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "msedge-tts": "^2.1.0"
+  }
+}

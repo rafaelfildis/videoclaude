@@ -1,0 +1,7 @@
+{
+  "falas": [
+    { "id": "f1", "inicio": 5.0, "legendas": ["Esta é uma narração de exemplo para o modelo de vídeo."] },
+    { "id": "f2", "inicio": 11.5, "legendas": ["Cada linha deste arquivo vira um áudio separado,", "com os tempos de cada palavra."] }
+  ],
+  "chaves": ["exemplo", "palavra."]
+}

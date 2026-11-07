@@ -1,0 +1,2 @@
+Esta é uma narração de exemplo para o modelo de vídeo.
+Cada linha deste arquivo vira um áudio separado, com os tempos de cada palavra.

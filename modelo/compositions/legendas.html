@@ -1,0 +1,24 @@
+<template>
+  <!-- Legendas: uma <div> por trecho da narração. data-start/duração no tempo do vídeo final.
+       ferramentas/tempos.mjs gera estes tempos a partir dos tempos das palavras da voz. -->
+  <style>
+    @font-face { font-family: "Jost"; src: url("assets/fonts/Jost.woff2") format("woff2"); font-weight: 300 700; }
+    #root { position: absolute; inset: 0; font-family: "Jost", sans-serif; }
+    .lg { position: absolute; left: 160px; top: 930px; width: 1600px; height: 100px; display: flex; align-items: center; justify-content: center; }
+    .lg span { display: inline-block; max-width: 1580px; padding: 12px 30px; border-radius: 12px; background: rgba(4,10,24,.88);
+      border-bottom: 3px solid #4fd1ff; color: #ffffff; font-size: 40px; font-weight: 500; line-height: 1.2; text-align: center; }
+  </style>
+  <div id="root" data-composition-id="legendas" data-width="1920" data-height="1080">
+    <div id="lg1" class="lg clip" data-start="5.0" data-duration="5.5" data-track-index="0"><span data-layout-allow-occlusion>Legenda de exemplo: até cerca de 65 caracteres por linha.</span></div>
+    <div id="lg2" class="lg clip" data-start="11.5" data-duration="5.0" data-track-index="0"><span data-layout-allow-occlusion>Cada trecho entra no tempo exato da fala.</span></div>
+    <div id="lg3" class="lg clip" data-start="18.0" data-duration="5.0" data-track-index="0"><span data-layout-allow-occlusion>Troque estes textos pela narração do seu vídeo.</span></div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const L = [5.0, 11.5, 18.0];
+      L.forEach((a, i) => tl.fromTo(`#lg${i + 1} span`, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.14, ease: "power2.out" }, a));
+      window.__timelines["legendas"] = tl;
+    })();
+  </script>
+</template>

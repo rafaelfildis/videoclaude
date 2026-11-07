@@ -1,0 +1,10 @@
+# caches e saídas locais
+.hyperframes/
+.thumbnails/
+.waveform-cache/
+node_modules/
+renders/
+*.mp4
+*.wav
+*.mp3
+ferramentas/saida/

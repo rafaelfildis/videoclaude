@@ -1,0 +1,37 @@
+<template>
+  <style>
+    @font-face { font-family: "Jost"; src: url("assets/fonts/Jost.woff2") format("woff2"); font-weight: 300 700; }
+    #root { position: absolute; inset: 0; font-family: "Jost", sans-serif; color: #e6f0ff; }
+    #en-cena { position: absolute; inset: 0; }
+    #en-veu { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 50% 45%, rgba(4,9,22,.6), rgba(4,9,22,.9)); }
+    #en-luz { position: absolute; left: 460px; top: 80px; width: 1000px; height: 760px;
+      background: radial-gradient(ellipse 50% 50% at 50% 42%, rgba(79,209,255,.26), rgba(79,209,255,0)); }
+    #en-logo { position: absolute; left: 660px; top: 190px; width: 600px; height: 164px; }
+    #en-frase { position: absolute; left: 260px; top: 410px; width: 1400px; text-align: center; font-size: 50px; font-weight: 600; }
+    #en-frase em { font-style: normal; color: #4fd1ff; }
+    #en-filete { position: absolute; left: 810px; top: 500px; width: 300px; height: 3px; background: linear-gradient(90deg, rgba(217,180,90,0), #d9b45a, rgba(217,180,90,0)); }
+    #en-tcm { position: absolute; left: 260px; top: 540px; width: 1400px; text-align: center; font-size: 38px; color: #9fd8ff; }
+  </style>
+  <div id="root" data-composition-id="encerramento" data-width="1920" data-height="1080">
+    <div id="en-cena" class="clip" data-start="0" data-duration="6.2" data-track-index="0" data-layout-allow-overlap data-layout-allow-occlusion>
+      <div id="en-veu" data-layout-ignore></div>
+      <div id="en-luz" data-layout-ignore></div>
+      <img id="en-logo" src="assets/exemplo/marca.svg" alt="Sua marca" />
+      <div id="en-frase" data-layout-allow-occlusion>Nome do <em>vídeo</em></div>
+      <div id="en-filete" data-layout-ignore></div>
+      <div id="en-tcm" data-layout-allow-occlusion>Nome da instituição</div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#en-veu", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
+      tl.fromTo("#en-luz", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0);
+      tl.fromTo("#en-logo", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, 0.1);
+      tl.fromTo("#en-frase", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.6);
+      tl.fromTo("#en-filete", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.9);
+      tl.fromTo("#en-tcm", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.2);
+      window.__timelines["encerramento"] = tl;
+    })();
+  </script>
+</template>

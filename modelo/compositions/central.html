@@ -1,0 +1,118 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden;
+      background: radial-gradient(ellipse 90% 70% at 50% 30%, #10204a 0%, #0a1430 40%, #060b18 100%); }
+    #cc-mundo { position: absolute; inset: 0; transform-origin: 50% 62%; }
+    /* teto: arcos de luz e cones de holofote */
+    #cc-teto { position: absolute; left: 0; top: 0; width: 1920px; height: 260px; }
+    .cc-cone { position: absolute; top: 0; width: 300px; height: 900px; transform-origin: 50% 0;
+      background: linear-gradient(to bottom, rgba(120,200,255,.16), rgba(120,200,255,0) 80%);
+      clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); }
+    /* parede curva de telas */
+    #cc-parede { position: absolute; left: 960px; top: 400px; width: 0; height: 0; perspective: 1500px; transform-style: preserve-3d; }
+    .cc-painel { position: absolute; left: -170px; top: -230px; width: 340px; height: 400px; border-radius: 10px; overflow: hidden;
+      background: #0b1736; border: 2px solid rgba(79,209,255,.5);
+      box-shadow: 0 0 26px rgba(79,209,255,.28), inset 0 0 30px rgba(79,209,255,.12); }
+    .cc-painel img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; }
+    .cc-painel .cc-varre { position: absolute; left: 0; right: 0; height: 70px; top: -70px;
+      background: linear-gradient(to bottom, rgba(79,209,255,0), rgba(79,209,255,.22), rgba(79,209,255,0)); }
+    .cc-painel .cc-linhas { position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(4,16,31,.35) 0 2px, transparent 2px 5px); }
+    #cc-centro img { object-fit: contain; opacity: .95; padding: 40px; background: radial-gradient(circle at 50% 50%, #12306b, #0b1736 70%); }
+    /* consoles */
+    .cc-console { position: absolute; top: 780px; height: 120px; border-radius: 10px 10px 0 0;
+      background: linear-gradient(to bottom, #13224a, #0a1430); border-top: 2px solid rgba(79,209,255,.45);
+      box-shadow: 0 -8px 30px rgba(79,209,255,.15); }
+    .cc-tecla { position: absolute; height: 10px; border-radius: 3px; }
+    /* piso */
+    #cc-piso { position: absolute; left: -400px; right: -400px; top: 800px; bottom: -80px; overflow: hidden;
+      background: linear-gradient(to bottom, #0c1a3c, #060b18 70%); }
+    #cc-piso-grade { position: absolute; left: -700px; right: -700px; top: -30px; height: 1000px; transform-origin: 50% 0;
+      transform: perspective(480px) rotateX(66deg);
+      background: repeating-linear-gradient(90deg, rgba(79,209,255,.18) 0 2px, transparent 2px 130px),
+                  repeating-linear-gradient(0deg, rgba(79,209,255,.12) 0 2px, transparent 2px 130px); }
+    #cc-brilho { position: absolute; left: 0; right: 0; top: 0; height: 260px;
+      background: radial-gradient(ellipse 45% 100% at 50% 0%, rgba(79,209,255,.22), rgba(79,209,255,0)); }
+    #cc-horizonte { position: absolute; left: -400px; right: -400px; top: 798px; height: 3px; background: rgba(79,209,255,.55);
+      box-shadow: 0 0 22px 5px rgba(79,209,255,.35); }
+    #cc-plataforma { position: absolute; left: 610px; top: 935px; width: 700px; height: 130px; }
+    #cc-particulas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  </style>
+  <div id="root" data-composition-id="central" data-width="1920" data-height="1080">
+    <div id="cc-mundo" data-layout-ignore>
+      <svg id="cc-teto" viewBox="0 0 1920 260">
+        <g fill="none" stroke="#4fd1ff" stroke-linecap="round">
+          <path d="M80 210 Q960 20 1840 210" stroke-width="3" stroke-opacity=".55" />
+          <path d="M40 250 Q960 70 1880 250" stroke-width="2" stroke-opacity=".3" />
+          <path id="cc-arco-luz" d="M80 210 Q960 20 1840 210" stroke="#ffffff" stroke-width="5" stroke-dasharray="40 1900" />
+        </g>
+      </svg>
+      <div class="cc-cone" style="left: 310px; transform: rotate(9deg)"></div>
+      <div class="cc-cone" style="left: 810px"></div>
+      <div class="cc-cone" style="left: 1310px; transform: rotate(-9deg)"></div>
+
+      <div id="cc-parede">
+        <div class="cc-painel" style="transform: rotateY(-56deg) translateZ(-1250px)"><img src="assets/exemplo/painel-1.svg" alt="" /><div class="cc-linhas"></div><div class="cc-varre"></div></div>
+        <div class="cc-painel" style="transform: rotateY(-42deg) translateZ(-1250px)"><img src="assets/exemplo/painel-2.svg" alt="" /><div class="cc-linhas"></div><div class="cc-varre"></div></div>
+        <div class="cc-painel" style="transform: rotateY(-28deg) translateZ(-1250px)"><img src="assets/exemplo/painel-3.svg" alt="" /><div class="cc-linhas"></div><div class="cc-varre"></div></div>
+        <div class="cc-painel" style="transform: rotateY(-14deg) translateZ(-1250px)"><img src="assets/exemplo/painel-4.svg" alt="" /><div class="cc-linhas"></div><div class="cc-varre"></div></div>
+        <div class="cc-painel" id="cc-centro" style="transform: rotateY(0deg) translateZ(-1250px)"><img src="assets/exemplo/marca-quadrada.svg" alt="Sua marca" /><div class="cc-varre"></div></div>
+        <div class="cc-painel" style="transform: rotateY(14deg) translateZ(-1250px)"><img src="assets/exemplo/painel-1.svg" alt="" /><div class="cc-linhas"></div><div class="cc-varre"></div></div>
+        <div class="cc-painel" style="transform: rotateY(28deg) translateZ(-1250px)"><img src="assets/exemplo/painel-3.svg" alt="" /><div class="cc-linhas"></div><div class="cc-varre"></div></div>
+        <div class="cc-painel" style="transform: rotateY(42deg) translateZ(-1250px)"><img src="assets/exemplo/painel-2.svg" alt="" style="object-position: 80% 80%" /><div class="cc-linhas"></div><div class="cc-varre"></div></div>
+        <div class="cc-painel" style="transform: rotateY(56deg) translateZ(-1250px)"><img src="assets/exemplo/painel-4.svg" alt="" style="object-position: 50% 90%" /><div class="cc-linhas"></div><div class="cc-varre"></div></div>
+      </div>
+
+      <div id="cc-horizonte"></div>
+      <div id="cc-piso"><div id="cc-piso-grade"></div><div id="cc-brilho"></div></div>
+      <svg id="cc-plataforma" viewBox="0 0 700 130">
+        <ellipse cx="350" cy="65" rx="330" ry="52" fill="rgba(79,209,255,.07)" stroke="#4fd1ff" stroke-opacity=".7" stroke-width="3" />
+        <ellipse cx="350" cy="65" rx="270" ry="40" fill="none" stroke="#4fd1ff" stroke-opacity=".4" stroke-width="2" />
+        <ellipse id="cc-anel" cx="350" cy="65" rx="300" ry="46" fill="none" stroke="#ffffff" stroke-width="4" stroke-dasharray="60 1900" />
+      </svg>
+
+      <div class="cc-console" style="left: -40px; width: 420px">
+        <div class="cc-tecla" style="left: 70px; top: 26px; width: 90px; background: #4fd1ff"></div>
+        <div class="cc-tecla" style="left: 180px; top: 26px; width: 60px; background: #ff6a5c"></div>
+        <div class="cc-tecla" style="left: 260px; top: 26px; width: 110px; background: #2b8cff"></div>
+      </div>
+      <div class="cc-console" style="left: 1540px; width: 420px">
+        <div class="cc-tecla" style="left: 50px; top: 26px; width: 110px; background: #2b8cff"></div>
+        <div class="cc-tecla" style="left: 180px; top: 26px; width: 60px; background: #4fd1ff"></div>
+        <div class="cc-tecla" style="left: 260px; top: 26px; width: 90px; background: #ff6a5c"></div>
+      </div>
+    </div>
+    <canvas id="cc-particulas" class="clip" width="1920" height="1080" data-start="0" data-duration="30" data-track-index="1" data-layout-ignore></canvas>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // câmera: uma tomada por bloco (abertura · cena · encerramento), sempre com leve aproximação. Ajuste os tempos ao vídeo novo.
+      const tomadas = [[0, 4.5, 1.0, 1.03, 0], [4.5, 23.8, 1.03, 1.12, -24], [23.8, 30, 1.0, 1.04, 0]];
+      tomadas.forEach(([a, b, s0, s1, x], i) => tl.fromTo("#cc-mundo", { scale: s0, x: x * 1.4 }, { scale: s1, x, duration: b - a, ease: "sine.inOut", immediateRender: i === 0 }, a));
+      tl.fromTo("#cc-arco-luz", { strokeDashoffset: 0 }, { strokeDashoffset: -1940, duration: 6, ease: "none", repeat: 20 }, 0);
+      tl.fromTo("#cc-anel", { strokeDashoffset: 0 }, { strokeDashoffset: -1960, duration: 5, ease: "none", repeat: 24 }, 0);
+      gsap.utils.toArray("#cc-parede .cc-varre").forEach((v, i) =>
+        tl.fromTo(v, { y: 0 }, { y: 540, duration: 3.2 + (i % 4) * 0.45, ease: "none", repeat: Math.floor(119 / (3.2 + (i % 4) * 0.45)) - 1 }, i * 0.37));
+      gsap.utils.toArray(".cc-tecla").forEach((k, i) =>
+        tl.fromTo(k, { opacity: 0.35 }, { opacity: 1, duration: 0.5 + (i % 3) * 0.2, ease: "sine.inOut", yoyo: true, repeat: 92 }, i * 0.23));
+      window.__timelines["central"] = tl;
+
+      // partículas flutuando (posição é função do tempo)
+      const c = document.getElementById("cc-particulas"), g = c.getContext("2d");
+      let s = 12345; const rnd = () => ((s = (s * 1103515245 + 12345) % 2147483648) / 2147483648);
+      const P = Array.from({ length: 150 }, () => ({ x: rnd() * 1920, y: rnd() * 1080, r: 0.8 + rnd() * 2.2, v: 6 + rnd() * 18, f: rnd() * 6.28, a: 0.25 + rnd() * 0.5 }));
+      function desenhar(t) {
+        g.clearRect(0, 0, 1920, 1080);
+        for (const p of P) {
+          const y = ((p.y - p.v * t) % 1080 + 1080) % 1080, x = p.x + 14 * Math.sin(t * 0.4 + p.f);
+          g.globalAlpha = p.a * (0.6 + 0.4 * Math.sin(t * 1.7 + p.f));
+          g.fillStyle = "#9fe6ff"; g.beginPath(); g.arc(x, y, p.r, 0, 6.283); g.fill();
+        }
+        g.globalAlpha = 1;
+      }
+      window.addEventListener("hf-seek", (e) => desenhar(e.detail.time));
+      desenhar(0);
+    })();
+  </script>
+</template>

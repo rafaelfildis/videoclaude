@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #070c1a; }
+      #root { position: relative; width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <!--
+      Modelo do padrão da série (30 s de exemplo):
+        0–4,5 s   abertura (logo + título + subtítulo)
+        4,5–23,8  cena (gravação emoldurada, etapas, câmera, destaques, cartão-resumo)
+        23,8–30   encerramento (logo + frase + instituição)
+      Fundo "central de comando" e legendas cobrem o vídeo inteiro.
+      Para um vídeo novo: ajuste as durações aqui, em compositions/central.html (tomadas e canvas) e nas cenas.
+    -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+      <div id="central" data-composition-id="central" data-composition-src="compositions/central.html" data-start="0" data-duration="30"
+        data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 1"></div>
+      <div id="abertura" data-composition-id="abertura" data-composition-src="compositions/abertura.html" data-start="0" data-duration="4.6"
+        data-track-index="2" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 3"></div>
+      <div id="cena" data-composition-id="cena" data-composition-src="compositions/cena.html" data-start="4.5" data-duration="19.3"
+        data-track-index="2" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 3"></div>
+      <div id="encerramento" data-composition-id="encerramento" data-composition-src="compositions/encerramento.html" data-start="23.8" data-duration="6.2"
+        data-track-index="2" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 3"></div>
+      <div id="legendas" data-composition-id="legendas" data-composition-src="compositions/legendas.html" data-start="0" data-duration="30"
+        data-track-index="4" data-track-kind="captions" data-width="1920" data-height="1080" style="z-index: 6"></div>
+
+      <!-- Áudio (adicione os seus arquivos em assets/ e descomente):
+      <audio id="fala-1" class="clip" src="assets/voz/f1.wav" data-start="4.94" data-duration="6.35" data-media-start="0.06" data-track-index="7" data-volume="1.4"></audio>
+      <audio id="trilha" class="clip" src="assets/musica.wav" data-start="0" data-duration="30" data-track-index="9" data-volume="0.8"></audio>
+      <audio id="efeitos" class="clip" src="assets/efeitos.wav" data-start="0" data-duration="30" data-track-index="10" data-volume="1"></audio>
+      -->
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
